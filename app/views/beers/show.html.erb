@@ -14,5 +14,15 @@
   <%= link_to @beer.brewery.name, @beer.brewery %>
 </p>
 
+<% if @beer.average_rating %>
+  <p>
+    <strong>Average rating:</strong>
+    <%= @beer.average_rating %>
+    <i>(Rated <%= pluralize(@beer.ratings.count, 'time') %>)</i>
+  </p>
+<% else %>
+  <p><i>This beer has not yet been rated.</i></p>
+<% end %>
+
 <%= link_to 'Edit', edit_beer_path(@beer) %> |
 <%= link_to 'Back', beers_path %>

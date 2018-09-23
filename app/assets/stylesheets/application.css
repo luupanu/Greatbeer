@@ -14,9 +14,13 @@
  *= require_self
  */
 
-.navibar {
-    padding: 10px;
-    background: #EFEFEF;
+.navbar {
+  padding: 10px;
+  background: #EFEFEF;
+}
+
+.align-right {
+  float: right;
 }
 
 li {

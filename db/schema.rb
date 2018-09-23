@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_22_195742) do
+ActiveRecord::Schema.define(version: 2018_09_23_070550) do
 
   create_table "beer_clubs", force: :cascade do |t|
     t.string "name"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2018_09_22_195742) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["beer_club_id", "user_id"], name: "index_memberships_on_beer_club_id_and_user_id", unique: true
   end
 
   create_table "ratings", force: :cascade do |t|

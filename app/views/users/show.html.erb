@@ -4,7 +4,7 @@
   <%= @user.username %>
 </h1>
 
-<% if @user.average_rating %>
+<% if not @user.ratings.empty? %>
     <%= @user.username %> has <%= pluralize(@user.ratings.count, 'rating') %> with an average score of <%= @user.average_rating %>!
 
   <h2><%= @user.username %>'s ratings</h2>
@@ -16,6 +16,12 @@
         <% end %>
       </li>
     <% end %>
+  </ul>
+
+  <h2><%= @user.username %>'s favorites</h2>
+  <ul>
+    <li>Favorite brewery: <%= @user.favorite_brewery.name %></li>
+    <li>Favorite style: <%= @user.favorite_style %></li>
   </ul>
 <% else %>
   <p>No ratings found.</p>
@@ -32,10 +38,11 @@
       </li>
     <% end %>
   </ul>
-  <br/>
 <% else %>
   <p><%= @user.username %> is not a member of any beer clubs. What a shame! SHAME!</p>
 <% end %>
+
+<br/>
 
 <% if @user == current_user %>
   <%= link_to 'Edit', edit_user_path(@user) %> |

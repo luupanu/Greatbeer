@@ -60,6 +60,7 @@ group :development do
 end
 
 group :test do
+  gem 'simplecov', require: false
   gem 'factory_bot_rails'
   gem 'launchy'
   # Adds support for Capybara system testing and selenium driver

@@ -8,13 +8,9 @@ module Helpers
   end
 
   def create_beer_with_rating(object, score)
-    if object[:style]
-      beer = FactoryBot.create(:beer, style: object[:style])
-    elsif object[:brewery]
-      beer = FactoryBot.create(:beer, brewery: object[:brewery])
-    else
-      beer = FactoryBot.create(:beer)
-    end
+    style = object[:style] ? object[:style] : 'Lager'
+    brewery = object[:brewery] ? object[:brewery] : FactoryBot.create(:brewery)
+    beer = FactoryBot.create(:beer, style: style, brewery: brewery)
     FactoryBot.create(:rating, beer: beer, score: score, user: object[:user])
     beer
   end

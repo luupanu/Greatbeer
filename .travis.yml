@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+- 2.5.1
+script:
+- bundle exec rails db:migrate
+- bundle exec rspec -fd spec
+deploy:
+  provider: heroku
+  api_key:
+    secure: Yvm49x2pHpEEnHuKeahnPVyeaYze8GGEgYp8+slv40qytH23oWU6g1la6Vda7cYXQqUqQUvPQx+Vp0kVKYcJwaGMkb6btFcYSo2ofghdng8VcFsvwoTbLnzpYRt8b+g6DJHhDtO+OBSH1m7rlN+ourmyVgkODfjucbEOH86kFeO1KWhl6BhVDzefBrLctbBUPCQI7dLTdv/XZ/mZPZ9yle27gm3hZAiBqZl/Ys5LUm9SoF84rSVArUqUfWCLIjLal8/gee215bQTjMuloT634FDv9/dlzNRo5yFsM7EIVZzqbMeL4fbCteBaboBgvDCNHjZOuUVzQ1/tgEqbcDCgJwlFEckZZ93po9sErrzeKWyxuYSHdzEsXSnaOdmYT5jd/DgCHYBkB3uQgh43JqTcYYQg3YY4Z3fmhwKpLh24SEaKnf2dtnaC+NWNPriBovZuJ9ktyB7CiqVQSDIdexSwI7QRSfV5IFCC3C8TfA+O+Qmg6PrSWGuuE+jTpXm6rLcBWvl4D11jxu6tObsI3BTqQMduIRH5FKGexZuSyNupZgDbyoRKi0mJutyOx23bm0VU+vDmFZV8mOBXnOSHvhIBFyAEsERk0FnGSz/Gvyz8lH2DpR3cWbHVzLHAxxTO4tBw+pC/sKRva7ezp0NqRyHdKC9CV8UBrP1pydKzfsJh6xE=
+  app: greatbeer
+  on:
+    repo: luupanu/Greatbeer
+  run: "rake db:migrate"

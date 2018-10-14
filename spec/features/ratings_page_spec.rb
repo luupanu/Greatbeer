@@ -29,17 +29,20 @@ end
 
 describe "when many ratings are given" do 
   let!(:user) { FactoryBot.create :user }
+  let!(:style) { FactoryBot.create :style, name: 'very nice beer' }
+  let!(:brewery) { FactoryBot.create :brewery, name: 'Schlenkerla' }
 
   before :each do
-    schlenkerla = FactoryBot.create :brewery, name: 'Schlenkerla'
-    create_beer_with_rating({ user: user, style: 'Rauchbier', brewery: schlenkerla }, 20)
+    create_beer_with_rating({ user: user, brewery: brewery, style: style }, 20)
     create_beer_with_rating({ user: user }, 10)
+
     user2 = FactoryBot.create :user, username: 'Arto'
     create_beers_with_many_ratings({ user: user2 }, 7, 9, 15)
   end
 
   it "all and the count are shown at ratings_page" do 
     visit ratings_path
+
     expect(page).to have_content 'Number of ratings: 5'
     expect(page).to have_content 'test_beer: 10 Pekka'
     expect(page).to have_content 'test_beer: 20 Pekka'
@@ -69,7 +72,7 @@ describe "when many ratings are given" do
 
   it "favorite style and brewery are shown at users page" do 
     visit user_path(user)
-    expect(page).to have_content 'Favorite style: Rauchbier'
-    expect(page).to have_content 'Favorite brewery: Schlenkerla'
+    expect(page).to have_content "Favorite style: #{style.name}"
+    expect(page).to have_content "Favorite brewery: #{brewery.name}"
   end
 end

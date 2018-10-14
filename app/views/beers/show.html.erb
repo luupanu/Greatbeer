@@ -1,12 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h2>
-  <%= @beer.name %>
-</h2>
+<h2><%= @beer.name %></h2>
 
 <p>
   <strong>Style:</strong>
-  <%= @beer.style %>
+  <%= @beer.style.name %>
 </p>
 
 <p>
@@ -25,6 +23,15 @@
 <% end %>
 
 <% if current_user %>
+  <h4>give a rating:</h4>
+
+  <%= form_for(@rating) do |form| %>
+    <%= form.hidden_field :beer_id %>
+    score: <%= form.number_field :score %>
+    <%= form.submit %>
+  <% end %>
+  <br/>
+
   <%= link_to 'Edit', edit_beer_path(@beer) %> |
   <%= link_to 'Delete', @beer, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <% end %>

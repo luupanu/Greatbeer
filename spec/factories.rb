@@ -10,10 +10,15 @@ FactoryBot.define do
     year { 2000 }
   end
 
+  factory :style do
+    name { "Lager" }
+    description { "very gut" }
+  end
+
   factory :beer do
     name { "test_beer" }
-    style { "Lager" }
     brewery
+    style
   end
 
   factory :rating do

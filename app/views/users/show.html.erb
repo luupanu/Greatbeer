@@ -1,11 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1>
-  <%= @user.username %>
-</h1>
+<h1><%= @user.username %></h1>
 
 <% if not @user.ratings.empty? %>
-    <%= @user.username %> has <%= pluralize(@user.ratings.count, 'rating') %> with an average score of <%= @user.average_rating %>!
+  <%= @user.username %> has <%= pluralize(@user.ratings.count, 'rating') %> with an average score of <%= @user.average_rating %>!
 
   <h2><%= @user.username %>'s ratings</h2>
   <ul>
@@ -21,7 +19,7 @@
   <h2><%= @user.username %>'s favorites</h2>
   <ul>
     <li>Favorite brewery: <%= @user.favorite_brewery.name %></li>
-    <li>Favorite style: <%= @user.favorite_style %></li>
+    <li>Favorite style: <%= @user.favorite_style.name %></li>
   </ul>
 <% else %>
   <p>No ratings found.</p>

@@ -32,3 +32,9 @@
 
 # Ignore test coverage reports.
 /coverage/*
+
+# Ignore local environment file.
+/config/local_env.yml
+
+# Ignore production DB backup.
+db/development.sqlite3.backup

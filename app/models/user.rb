@@ -37,6 +37,10 @@ class User < ApplicationRecord
     largest_hash_key(avg_score_by_style)
   end
 
+  def member_of?(beer_club)
+    beer_club.members.exists?(id)
+  end
+
   private
 
   def largest_hash_key(hash)

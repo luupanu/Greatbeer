@@ -40,25 +40,24 @@
             <%= link_to 'places', places_path, { class: "nav-link" } %>
           </li> 
           <% if current_user %>
-            <li class="nav-item">
-              <%= link_to current_user.username, current_user, { class: "nav-link" } %>
-            </li> 
-            <li class="nav-item">
-              <%= link_to 'rate a beer ', new_rating_path, { class: "nav-link" } %>
-            </li>   
-            <li class="nav-item">
-              <%= link_to 'join a club ', new_membership_path, { class: "nav-link" } %>
-            </li> 
-            <li class="nav-item">
-              <%= link_to 'signout', signout_path, { class: "nav-link", method: :delete  } %>
-            </li>                    
+            <div class="dropdown">
+              <button class="active nav-link btn-info dropdown-toggle" data-toggle="dropdown">
+                <%= current_user.username %>
+              </button>
+              <div class="dropdown-menu">
+                  <%= link_to 'my page', current_user, class: "dropdown-item" %>
+                  <%= link_to 'rate a beer ', new_rating_path, class: "dropdown-item" %>  
+                  <%= link_to 'join a club ', new_membership_path, class: "dropdown-item" %>
+                  <%= link_to 'signout', signout_path, { class: "dropdown-item", method: :delete } %>
+              </div>
+            </div>
           <% else %>
             <li class="nav-item">
               <%= link_to 'signin', signin_path, { class: "nav-link" } %>
             </li>  
             <li class="nav-item">
               <%= link_to 'signup', signup_path, { class: "nav-link" } %>
-            </li>                        
+            </li>
           <% end %>                            
         </ul>
       </div>

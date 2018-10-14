@@ -11,17 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name,
+      class: "form-control",
+      placeholder: "Enter name"
+    %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :year %>
-    <%= form.number_field :year %>
+    <%= form.number_field :year,
+      class: "form-control",
+      placeholder: "Enter year from 1040 to #{ brewery.current_year.call }"
+    %>
   </div>
 
   <div class="actions">
-    <%= form.submit class:"btn btn-primary" %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

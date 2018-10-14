@@ -11,17 +11,24 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, {
+      class: "form-control",
+      placeholder: "Enter style name"
+    } %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :description %>
-    <%= form.text_area :description, size: "50x5" %>
+    <%= form.text_area :description, {
+      class: "form-control",
+      rows: 5,
+      placeholder: "Enter style description"
+    } %>
   </div>
 
   <div class="actions">
-    <%= form.submit class:"btn btn-primary" %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -12,6 +12,10 @@ class Brewery < ApplicationRecord
     only_integer: true
   }
 
+  def current_year
+    proc { Date.current.year }
+  end
+
   def print_report
     puts name
     puts "established at year #{year}"

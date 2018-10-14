@@ -1,8 +1,13 @@
 <h1>Beer places search</h1>
 
 <%= form_tag places_path do %>
-  city <%= text_field_tag :city, params[:city] %>
-  <%= submit_tag "Search", class:"btn btn-primary" %>
+  <div class="form-group">
+    <%= text_field_tag :city, params[:city],
+      class: "form-control",
+      placeholder: "Search"
+    %>
+    <%= submit_tag "Search", :style => "display: none;" %>
+  </div>
 <% end %>
 
 <% if @places %>

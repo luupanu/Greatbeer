@@ -12,23 +12,32 @@
   <% end %>
 
   <% if @user.new_record? %>
-    <div class="field">
+    <div class="form-group">
       <%= form.label :username %>
-      <%= form.text_field :username %>
+      <%= form.text_field :username,
+        class: "form-control",
+        placeholder: "Enter username"
+      %>
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :password %>
-    <%= form.password_field :password %>
+    <%= form.password_field :password,
+        class: "form-control",
+        placeholder: "Enter password"
+    %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
+    <%= form.password_field :password_confirmation,
+        class: "form-control",
+        placeholder: "Enter password again"
+    %>
   </div>
 
   <div class="actions">
-    <%= form.submit class:"btn btn-primary" %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -25,8 +25,13 @@
 
   <%= form_for(@rating) do |form| %>
     <%= form.hidden_field :beer_id %>
-    score: <%= form.number_field :score %>
-    <%= form.submit class:"btn btn-primary" %>
+    <div class="form-group">
+      <%= form.number_field :score,
+        class: "form-control",
+        placeholder: "Enter score from 1 to 50"
+      %>
+    </div>
+    <%= form.submit class: "btn btn-primary" %>
   <% end %>
   <br/>
 

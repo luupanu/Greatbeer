@@ -1,7 +1,7 @@
 <h1><%= @user.username %></h1>
 
 <% if not @user.ratings.empty? %>
-  <%= @user.username %> has <%= pluralize(@user.ratings.size, 'rating') %> with an average score of <%= @user.average_rating %>!
+  <%= @user.username %> has <%= pluralize(@user.ratings.size, 'rating') %> with an average score of <%= round(@user.average_rating) %>!
 
   <h2><%= @user.username %>'s ratings</h2>
   <ul>
@@ -38,11 +38,6 @@
   <p><%= @user.username %> is not a member of any beer clubs. What a shame! SHAME!</p>
 <% end %>
 
-<br/>
-
 <% if @user == current_user %>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= edit_and_destroy_buttons(@user) %>
 <% end %>
-
-<%= link_to 'Back', users_path %>

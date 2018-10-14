@@ -20,8 +20,4 @@
   <% end %>
 </li>
 
-<% if current_user %>
-  <br/>
-  <%= link_to 'Edit', edit_style_path(@style) %> |
-  <%= link_to 'Delete', @style, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<% end %>
+<%= edit_and_destroy_buttons(@style) %>

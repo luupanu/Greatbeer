@@ -19,14 +19,10 @@
 
 <p>
   <% if @brewery.average_rating %>
-    Average rating: <%= @brewery.average_rating %> <em>(Rated <%= pluralize(@brewery.ratings.size, 'time') %>)</em>
+    Average rating: <%= round(@brewery.average_rating) %> <em>(Rated <%= pluralize(@brewery.ratings.size, 'time') %>)</em>
   <% else %>
     <em>This brewery has no ratings yet.</em>
   <% end %>
 </p>
 
-<% if current_user %>
-  <%= link_to 'Edit', edit_brewery_path(@brewery) %> |
-  <%= link_to 'Delete', @brewery, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<% end %>
-<%= link_to 'Back', breweries_path %>
+<%= edit_and_destroy_buttons(@brewery) %>

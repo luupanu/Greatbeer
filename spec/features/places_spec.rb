@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 describe "Places" do
+  before :all do
+    Capybara.ignore_hidden_elements = false
+  end
+
+  after :all do
+    Capybara.ignore_hidden_elements = true
+  end
+
   it "if one is returned by API, it is shown at the page" do
     allow(BeerMappingAPI).to receive(:places_in).with("kumpula").and_return(
       [Place.new(name:"Oljenkorsi", id: 1)]

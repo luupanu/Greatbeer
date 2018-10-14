@@ -40,17 +40,6 @@ describe "when many ratings are given" do
     create_beers_with_many_ratings({ user: user2 }, 7, 9, 15)
   end
 
-  it "all and the count are shown at ratings_page" do 
-    visit ratings_path
-
-    expect(page).to have_content 'Number of ratings: 5'
-    expect(page).to have_content 'test_beer: 10 Pekka'
-    expect(page).to have_content 'test_beer: 20 Pekka'
-    expect(page).to have_content 'test_beer: 7 Arto'
-    expect(page).to have_content 'test_beer: 9 Arto'
-    expect(page).to have_content 'test_beer: 15 Arto'
-  end
-
   it "only users own ratings are shown at user page" do 
     visit user_path(user)
     expect(page).to have_content 'test_beer: 10'

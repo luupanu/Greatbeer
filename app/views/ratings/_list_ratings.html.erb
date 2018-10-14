@@ -1,0 +1,11 @@
+<ul class="list-group">
+  <% top.each do |rating| %>
+    <li class="list-group-item">
+      <%= link_to rating.beer.name, rating.beer %>
+      <span>by</span>
+      <%= link_to rating.user.username, rating.user %>
+      <span>at</span>
+      <%= rating.updated_at %>
+    </li>
+  <% end %>
+</ul>

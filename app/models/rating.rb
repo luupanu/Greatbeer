@@ -8,6 +8,8 @@ class Rating < ApplicationRecord
     only_integer: true
   }
 
+  scope :recent, ->(num) { Rating.order(:updated_at).limit(num) }
+
   def to_s
     "#{beer.name}: #{score}"
   end

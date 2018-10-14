@@ -1,14 +1,31 @@
-<h1>List of ratings</h1>
+<div class="row">
+  <div class="col-md-4">
+    <h2>Best beers</h2>
+    <%= render 'list', top: @top_beers %>
+  </div>
 
-<p>Number of ratings: <%= @ratings.count %></p>
+  <div class="col-md-4">
+    <h2>Best breweries</h2>
+    <%= render 'list', top: @top_breweries %>
+  </div>
 
-<ul>
-  <% @ratings.each do |rating| %>
-    <li><%= rating %> <%= link_to rating.user.username, user_path(rating.user) %></li>
-  <% end %>
-</ul>
-
+  <div class="col-md-4">
+    <h2>Best styles</h2>
+    <%= render 'list', top: @top_styles %>
+  </div>
+</div>
 <br>
+
+<div class="row">
+  <div class="col-md-6">
+    <h2>Most active users</h2>
+    <%= render 'list_users', top: @top_users %>
+  </div>
+  <div class="col-md-6">
+    <h2>Recent ratings</h2>
+    <%= render 'list_ratings', top: @recent_ratings %>
+  </div>
+</div>
 
 <% if current_user %>
   <%= link_to 'New rating', new_rating_path %>

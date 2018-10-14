@@ -1,5 +1,6 @@
 class Brewery < ApplicationRecord
   include RatingAverage
+  include RatingBest
 
   has_many :beers, dependent: :destroy
   has_many :ratings, through: :beers
@@ -12,6 +13,9 @@ class Brewery < ApplicationRecord
     only_integer: true
   }
 
+  scope :active, -> { where active: true }
+  scope :retired, -> { where active: [nil, false] }
+
   def current_year
     proc { Date.current.year }
   end
@@ -19,7 +23,7 @@ class Brewery < ApplicationRecord
   def print_report
     puts name
     puts "established at year #{year}"
-    puts "number of beers #{beers.count}"
+    puts "number of beers #{beers.size}"
   end
 
   def restart

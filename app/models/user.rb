@@ -19,6 +19,11 @@ class User < ApplicationRecord
                           message: 'must contain at least one uppercase letter (A-Z) and one number (0-9)'
                         }
 
+  def self.top(num = 0)
+    sorted_by_number_of_ratings = User.all.sort_by { |u| -u.ratings.size }
+    sorted_by_number_of_ratings[0..num - 1]
+  end
+
   def favorite_beer
     return nil if ratings.empty?
 

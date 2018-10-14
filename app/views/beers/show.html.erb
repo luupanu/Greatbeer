@@ -14,7 +14,7 @@
   <p>
     <strong>Average rating:</strong>
     <%= @beer.average_rating %>
-    <i>(Rated <%= pluralize(@beer.ratings.count, 'time') %>)</i>
+    <i>(Rated <%= pluralize(@beer.ratings.size, 'time') %>)</i>
   </p>
 <% else %>
   <p><i>This beer has not yet been rated.</i></p>

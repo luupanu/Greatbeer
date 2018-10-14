@@ -18,6 +18,6 @@
     <% end %>
 
     <%= form.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :name, selected: @beer_club_id) %>
-    <%= form.submit "Join" %>
+    <%= form.submit "Join", class:"btn btn-primary" %>
   <% end %>
 <% end %>

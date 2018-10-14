@@ -12,6 +12,6 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_that_admin
-    render file: 'public/403.html', status: :forbidden, layout: false
+    render file: 'public/403.html', status: :forbidden, layout: false unless current_user.admin
   end
 end

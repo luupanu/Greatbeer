@@ -69,7 +69,7 @@ class BreweriesController < ApplicationController
 
     new_status = @brewery.active? ? "active" : "retired"
 
-    redirect_to @brewery, notice: "this brewery is now #{new_status}"
+    redirect_to @brewery, notice: "This brewery is now #{new_status}."
   end
 
   private

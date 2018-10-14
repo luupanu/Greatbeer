@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   resources :places, only: [:index, :show]
   resources :ratings, only: [:index, :new, :create, :destroy]
   resources :styles
-  resources :users
+  resources :users do
+    post 'toggle_ban_status', on: :member
+  end
 end

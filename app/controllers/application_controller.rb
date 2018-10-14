@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def ensure_that_signed_in
     redirect_to signin_path, notice: 'you should be signed in' if current_user.nil?
   end
+
+  def ensure_that_admin
+    render file: 'public/403.html', status: :forbidden, layout: false
+  end
 end

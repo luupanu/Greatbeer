@@ -1,17 +1,21 @@
 Rails.application.routes.draw do
-  resources :memberships, only: [:new, :create, :destroy]
-  resources :beer_clubs
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get 'signup', to: 'users#new'
+  root 'breweries#index'
+
   get 'signin', to: 'sessions#new'
-  resources :places, only: [:index, :show]
+  get 'signup', to: 'users#new'
   post 'places', to: 'places#search'
   delete 'signout', to: 'sessions#destroy'
-  root 'breweries#index'
+
+  resource :session, only: [:new, :create, :destroy]
+
+  resources :beer_clubs
   resources :beers
-  resources :breweries
-  resources :users
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+  resources :memberships, only: [:new, :create, :destroy]
+  resources :places, only: [:index, :show]
   resources :ratings, only: [:index, :new, :create, :destroy]
   resources :styles
-  resource :session, only: [:new, :create, :destroy]
+  resources :users
 end

@@ -3,9 +3,13 @@ module ApplicationHelper
     return unless current_user
 
     edit = link_to('Edit', url_for([:edit, item]), class: "btn btn-primary")
-    del = link_to('Delete', item, method: :delete,
-                                  data: { confirm: 'Are you sure?' },
-                                  class: "btn btn-danger")
+
+    if current_user.admin
+      del = link_to('Delete', item, method: :delete,
+                                    data: { confirm: 'Are you sure?' },
+                                    class: "btn btn-danger")
+    end
+
     raw("</br> #{edit} #{del}")
   end
 

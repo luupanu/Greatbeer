@@ -1,6 +1,7 @@
 class BreweriesController < ApplicationController
+  before_action :ensure_that_admin, only: [:destroy]
   before_action :ensure_that_signed_in, except: [:index, :show]
-  before_action :set_brewery, only: [:show, :edit, :update, :destroy]
+  before_action :set_brewery, only: [:show, :edit, :update, :destroy, :toggle_activity]
 
   # GET /breweries
   # GET /breweries.json
@@ -61,6 +62,14 @@ class BreweriesController < ApplicationController
       format.html { redirect_to breweries_url, notice: 'Brewery was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def toggle_activity
+    @brewery.update_attribute :active, !@brewery.active
+
+    new_status = @brewery.active? ? "active" : "retired"
+
+    redirect_to @brewery, notice: "this brewery is now #{new_status}"
   end
 
   private

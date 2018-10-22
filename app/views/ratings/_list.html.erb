@@ -7,11 +7,13 @@
   </thead>
 
   <tbody>
-    <% top.each do |item| %>
-      <tr>
-        <td><%= link_to item.name, item %></td>
-        <td><%= round(item.average_rating) %></td>
-      </tr>
+    <% if top %>
+      <% top.each do |item| %>
+        <tr>
+          <td><%= link_to item.name, item %></td>
+          <td><%= round(item.average_rating) %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

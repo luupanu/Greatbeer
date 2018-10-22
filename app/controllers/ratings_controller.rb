@@ -1,11 +1,12 @@
 class RatingsController < ApplicationController
   def index
-    @ratings = Rating.all
-    @top_beers = Beer.top(3)
-    @top_breweries = Brewery.top(3)
-    @top_styles = Style.top(3)
-    @top_users = User.top(3)
-    @recent_ratings = Rating.recent(5)
+    RatingJob.perform_async unless SuckerPunch::Queue.stats.key?("RatingJob")
+
+    @beers = Rails.cache.read("Beer-top-3")
+    @breweries = Rails.cache.read("Brewery-top-3")
+    @styles = Rails.cache.read("Style-top-3")
+    @users = Rails.cache.read("User-top-3")
+    @ratings = Rails.cache.read("Rating-recent-5")
   end
 
   def new

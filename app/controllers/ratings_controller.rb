@@ -1,7 +1,5 @@
 class RatingsController < ApplicationController
   def index
-    RatingJob.perform_async unless SuckerPunch::Queue.stats.key?("RatingJob")
-
     @beers = Rails.cache.read("Beer-top-3")
     @breweries = Rails.cache.read("Brewery-top-3")
     @styles = Rails.cache.read("Style-top-3")

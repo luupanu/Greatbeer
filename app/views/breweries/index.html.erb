@@ -1,16 +1,16 @@
 <h1>Breweries</h1>
 
-<h2>Active</h2>
+<% cache "brewerylist", skip_digest: true do %>
 
-<p>Number of active breweries: <%= @active_breweries.size %></p>
+  <h2>Active</h2>
+  <p>Number of active breweries: <%= @active_breweries.size %></p>
+  <%= render 'list', breweries: @active_breweries %>
 
-<%= render 'list', breweries: @active_breweries %>
+  <h2>Retired</h2>
+  <p>Number of retired breweries: <%= @retired_breweries.size %></p>
+  <%= render 'list', breweries: @retired_breweries %>
 
-<h2>Retired</h2>
-
-<p>Number of retired breweries: <%= @retired_breweries.size %></p>
-
-<%= render 'list', breweries: @retired_breweries %>
+<% end %>
 
 <br>
 

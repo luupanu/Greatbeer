@@ -7,11 +7,11 @@ class BeersController < ApplicationController
   # GET /beers
   # GET /beers.json
   def index
+    @order = params[:order] || 'name'
+    return if request.format.html? && fragment_exist?("beerlist-#{@order}")
+
     @beers = Beer.includes(:brewery, :style).all
-
-    order = params[:order] || 'name'
-
-    @beers =  case order
+    @beers =  case @order
               when 'name' then @beers.sort_by(&:name)
               when 'style' then @beers.sort_by{ |beer| beer.style.name }
               when 'brewery' then @beers.sort_by{ |beer| beer.brewery.name }
@@ -37,6 +37,8 @@ class BeersController < ApplicationController
   # POST /beers
   # POST /beers.json
   def create
+    expire_fragments
+
     @beer = Beer.new(beer_params)
 
     respond_to do |format|
@@ -53,6 +55,8 @@ class BeersController < ApplicationController
   # PATCH/PUT /beers/1
   # PATCH/PUT /beers/1.json
   def update
+    expire_fragments
+
     respond_to do |format|
       if @beer.update(beer_params)
         format.html { redirect_to @beer, notice: 'Beer was successfully updated.' }
@@ -67,6 +71,8 @@ class BeersController < ApplicationController
   # DELETE /beers/1
   # DELETE /beers/1.json
   def destroy
+    expire_fragments
+
     @beer.destroy
     respond_to do |format|
       format.html { redirect_to beers_url, notice: 'Beer was successfully destroyed.' }
@@ -92,5 +98,9 @@ class BeersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def beer_params
     params.require(:beer).permit(:name, :brewery_id, :style_id)
+  end
+
+  def expire_fragments
+    ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
   end
 end

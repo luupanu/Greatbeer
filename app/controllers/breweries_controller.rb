@@ -6,9 +6,10 @@ class BreweriesController < ApplicationController
   # GET /breweries
   # GET /breweries.json
   def index
+    return if request.format.html? && fragment_exist?('brewerylist')
+
     @breweries = Brewery.all
-    @active_breweries = @breweries.active
-    @retired_breweries = @breweries.retired
+    @active_breweries, @retired_breweries = @breweries.partition(&:active)
   end
 
   # GET /breweries/1
@@ -28,6 +29,8 @@ class BreweriesController < ApplicationController
   # POST /breweries
   # POST /breweries.json
   def create
+    expire_fragments
+
     @brewery = Brewery.new(brewery_params)
 
     respond_to do |format|
@@ -44,6 +47,8 @@ class BreweriesController < ApplicationController
   # PATCH/PUT /breweries/1
   # PATCH/PUT /breweries/1.json
   def update
+    expire_fragments
+
     respond_to do |format|
       if @brewery.update(brewery_params)
         format.html { redirect_to @brewery, notice: 'Brewery was successfully updated.' }
@@ -58,6 +63,8 @@ class BreweriesController < ApplicationController
   # DELETE /breweries/1
   # DELETE /breweries/1.json
   def destroy
+    expire_fragments
+
     @brewery.destroy
     respond_to do |format|
       format.html { redirect_to breweries_url, notice: 'Brewery was successfully destroyed.' }
@@ -86,5 +93,9 @@ class BreweriesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def brewery_params
     params.require(:brewery).permit(:name, :year, :active)
+  end
+
+  def expire_fragments
+    expire_fragment("brewerylist")
   end
 end
